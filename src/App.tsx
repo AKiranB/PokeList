@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import { gql, useQuery } from '@apollo/client';
+
+
+const GET_ALL_POKEMON = gql`
+query pokemons($limit: Int, $offset: Int) {
+  pokemons(limit: $limit, offset: $offset) {
+    results {
+      url
+      name
+      image
+    }
+  }
+}`
 
 function App() {
+
+  const limit = 100
+  const { loading, error, data } = useQuery(GET_ALL_POKEMON, { variables: { limit } });
+
+  type pokemonGeneralInfo = {
+    url: string
+    name: string
+    image: string
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      {loading && <p>loading</p>}
+      <div>
+        {data != null && data.pokemons.results.map((pokemon: pokemonGeneralInfo, i: number) => (
+          <div key={i}>
+            <p>
+              {pokemon.name.toUpperCase()}
+            </p>
+            <img src={pokemon.image} alt='a pokemon'>
+            </img>
+          </div>
+        )
+        )}
+      </div>
+    </>
+  )
+
 }
 
 export default App;
