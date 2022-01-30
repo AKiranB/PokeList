@@ -1,12 +1,8 @@
 
-import { gql, useQuery } from '@apollo/client';
-import PokeCard from './components/PokeCard';
-import { pokemonGeneralInfo } from './types/pokemonGeneral';
 import PokemonDetails from './pages/PokemonDetails'
 import PokemonList from './pages/PokemonList';
 import {
   BrowserRouter,
-  BrowserRouter as Router,
   Route,
   Routes,
 } from "react-router-dom";

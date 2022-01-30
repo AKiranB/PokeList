@@ -1,7 +1,6 @@
 
 import { pokemonGeneralInfo } from "../types/pokemonGeneral";
 
-
 const PokeCard = ({ url, name, image }: pokemonGeneralInfo) => {
     return (
         <>
