@@ -13,7 +13,7 @@ query pokemons($limit: Int, $offset: Int) {
   }
 }`
 
-function PokemonList() {
+function PokemonList({ props }: any) {
 
   const limit = 100
   const { loading, error, data } = useQuery(GET_ALL_POKEMON, { variables: { limit } });
@@ -25,6 +25,7 @@ function PokemonList() {
       {data != null && data.pokemons.results.map((pokemon: pokemonGeneralInfo, i: number) => (
         <>
           <PokeCard
+            {...props}
             {...pokemon}
           />
 
