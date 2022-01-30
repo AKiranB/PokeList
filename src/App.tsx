@@ -1,46 +1,31 @@
-import { useEffect, useState } from 'react';
-import './App.css';
+
 import { gql, useQuery } from '@apollo/client';
+import PokeCard from './components/PokeCard';
+import { pokemonGeneralInfo } from './types/pokemonGeneral';
+import PokemonList from './pages/PokemonList';
+import {
+  BrowserRouter,
+  BrowserRouter as Router,
+  Route,
+  Routes,
+} from "react-router-dom";
 
 
-const GET_ALL_POKEMON = gql`
-query pokemons($limit: Int, $offset: Int) {
-  pokemons(limit: $limit, offset: $offset) {
-    results {
-      url
-      name
-      image
-    }
-  }
-}`
 
 function App() {
 
-  const limit = 100
-  const { loading, error, data } = useQuery(GET_ALL_POKEMON, { variables: { limit } });
-
-  type pokemonGeneralInfo = {
-    url: string
-    name: string
-    image: string
-  }
 
   return (
+
+
     <>
-      {loading && <p>loading</p>}
-      <div>
-        {data != null && data.pokemons.results.map((pokemon: pokemonGeneralInfo, i: number) => (
-          <div key={i}>
-            <p>
-              {pokemon.name.toUpperCase()}
-            </p>
-            <img src={pokemon.image} alt='a pokemon'>
-            </img>
-          </div>
-        )
-        )}
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<PokemonList />}></Route>
+        </Routes>
+      </BrowserRouter>
     </>
+
   )
 
 }
