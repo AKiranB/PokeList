@@ -1,19 +1,9 @@
 import { gql, useQuery } from '@apollo/client';
 import PokeCard from '../components/PokeCard';
 import { pokemonGeneralInfo } from '../types/pokemonGeneral';
+import GET_ALL_POKEMON from '../operations/queries/getAllPokemon';
 
-const GET_ALL_POKEMON = gql`
-query pokemons($limit: Int, $offset: Int) {
-  pokemons(limit: $limit, offset: $offset) {
-    results {
-      url
-      name
-      image
-    }
-  }
-}`
-
-function PokemonList() {
+function PokemonList({ props }: any) {
 
   const limit = 100
   const { loading, error, data } = useQuery(GET_ALL_POKEMON, { variables: { limit } });
@@ -21,14 +11,11 @@ function PokemonList() {
   return (
     <>
       {loading && <p>loading</p>}
-
       {data != null && data.pokemons.results.map((pokemon: pokemonGeneralInfo, i: number) => (
-        <>
-          <PokeCard
-            {...pokemon}
-          />
-
-        </>
+        <PokeCard
+          {...props}
+          {...pokemon}
+        />
       )
       )}
 
