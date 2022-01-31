@@ -6,9 +6,12 @@ query pokemons($name:String!){
       sprites{
         front_default
         back_shiny
+        back_default
+        front_shiny
       }
       name
-          height
+      height
+      weight
       stats{
         stat{
           name
