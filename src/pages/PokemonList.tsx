@@ -1,4 +1,4 @@
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import PokeCard from '../components/PokeCard';
 import { pokemonGeneralInfo } from '../types/pokemonGeneral';
 import GET_ALL_POKEMON from '../operations/queries/getAllPokemon';
@@ -11,13 +11,15 @@ function PokemonList({ props }: any) {
   return (
     <>
       {loading && <p>loading</p>}
-      {data != null && data.pokemons.results.map((pokemon: pokemonGeneralInfo, i: number) => (
-        <PokeCard
-          {...props}
-          {...pokemon}
-        />
-      )
-      )}
+      <div className='flex flex-wrap rounded'>
+        {data != null && data.pokemons.results.map((pokemon: pokemonGeneralInfo, i: number) => (
+          <PokeCard
+            {...props}
+            {...pokemon}
+          />
+        )
+        )}
+      </div>
 
     </>
   )
