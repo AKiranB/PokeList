@@ -11,9 +11,10 @@ function PokemonList({ props }: any) {
   return (
     <>
       {loading && <p>loading</p>}
-      <div className='flex flex-wrap rounded'>
+      <div className='flex flex-wrap '>
         {data != null && data.pokemons.results.map((pokemon: pokemonGeneralInfo, i: number) => (
           <PokeCard
+            key={i}
             {...props}
             {...pokemon}
           />
