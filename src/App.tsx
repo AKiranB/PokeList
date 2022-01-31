@@ -7,21 +7,17 @@ import {
   Routes,
 } from "react-router-dom";
 
-
-
-function App(props: any) {
-
-
+const App = () => {
   return (
-
-
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<PokemonList {...props} />}></Route>
-          <Route path="/:name" element={<PokemonDetails {...props} />}></Route>
-        </Routes>
-      </BrowserRouter>
+      <div className="w-full h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ...">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<PokemonList />}></Route>
+            <Route path="/:name" element={<PokemonDetails />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </div>
     </>
 
   )
