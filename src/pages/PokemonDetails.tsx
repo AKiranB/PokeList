@@ -3,15 +3,12 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import GET_POKEMON from '../operations/queries/getPokemonDetails';
 
-
 type abilities = {
-
     ability: {
         name: string,
         url: string
-    },
-
-}
+    }
+};
 
 type pokemonDetails = {
     __typename: string,
@@ -46,7 +43,7 @@ const PokemonDetails = () => {
 
     }, [data]);
 
-    let pokemonName
+    let pokemonName;
 
     if (pokemon) {
         pokemonName = `${pokemon.name.slice(0, 1).toUpperCase()}${pokemon.name.slice(1, pokemon.name.length)}`
@@ -60,17 +57,16 @@ const PokemonDetails = () => {
                     <>
                         <div className='text-center '>
                             < h1 className='text-2xl mb-5'> {pokemonName}</h1 >
-                            <p>Height: {pokemon.height} Feet</p>
-                            <p>Weight: {pokemon.weight} lbs</p>
                         </div >
-                        <div>
-                            Abilities
-
-                            <p>{pokemon.abilities[0].ability.name}</p>
-
-                            {pokemon.abilities[1] && <p>{pokemon.abilities[1].ability.name}</p>}
-
-
+                        <div className="flex border">
+                            <div className="flex-col">
+                                <p>Height: {pokemon.height} Feet</p>
+                                <p>Weight: {pokemon.weight} lbs</p>
+                            </div>
+                            <div>
+                                <p>Abilities:<br></br>
+                                    {pokemon.abilities[0].ability.name}, {pokemon.abilities[1] && pokemon.abilities[1].ability.name} </p>
+                            </div>
                         </div>
                         <div className="flex justify-center w-64 flex-wrap">
                             <img className="w-32" alt="front sprite" src={pokemon.sprites.front_shiny}></img>
