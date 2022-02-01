@@ -9,7 +9,7 @@ const PokeCard = ({ url, name, image }: pokemonGeneralInfo) => {
     return (
         <>
             <div className="p-10 rounded m-10 bg-gradient-to-r from-cyan-500 to-blue-500">
-                <a href={`/${name}`}>
+                <a href={`/pokemon/${name}`}>
                     <p className="text-center">
                         {pokemonName}
                     </p>

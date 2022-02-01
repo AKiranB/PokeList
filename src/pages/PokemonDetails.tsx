@@ -28,7 +28,7 @@ type pokemonDetails = {
 
 };
 
-console.log('hello')
+console.log('hello from the details')
 
 const PokemonDetails = () => {
     const [pokemon, setPokemon] = useState<pokemonDetails>();

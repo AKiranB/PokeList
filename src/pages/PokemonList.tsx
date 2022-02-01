@@ -8,6 +8,7 @@ function PokemonList({ props }: any) {
   const limit = 100
   const { loading, error, data } = useQuery(GET_ALL_POKEMON, { variables: { limit } });
 
+  console.log('helo form the list')
   return (
     <>
       {loading && <p>loading</p>}

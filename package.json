@@ -2,7 +2,7 @@
   "name": "pokelist",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://AKiranB.github.io/PokeList",
+  "homepage": "http://AKiranB.github.io/PokeList",
   "dependencies": {
     "@apollo/client": "^3.5.8",
     "@apollo/react-hooks": "^4.0.0",

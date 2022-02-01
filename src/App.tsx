@@ -6,6 +6,7 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
+import Root from './pages/Root';
 
 const App = () => {
   return (
@@ -13,8 +14,9 @@ const App = () => {
       <div className="w-full h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ...">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<PokemonList />}></Route>
-            <Route path="/:name" element={<PokemonDetails />}></Route>
+            <Route path="/" element={<Root />} />
+            <Route path="/pokemon" element={<PokemonList />} />
+            <Route path="/pokemon/:name" element={<PokemonDetails />} />
           </Routes>
         </BrowserRouter>
       </div>
