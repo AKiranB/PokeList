@@ -43,12 +43,6 @@ const PokemonDetails = () => {
 
     }, [data]);
 
-    let pokemonName;
-
-    if (pokemon) {
-        pokemonName = `${pokemon.name.slice(0, 1).toUpperCase()}${pokemon.name.slice(1, pokemon.name.length)}`
-    };
-
     return (
         <div className="flex justify-center">
             <div className="p-10 rounded w-80 m-10 bg-gradient-to-r from-cyan-500 to-blue-500 border border-black">
@@ -56,7 +50,7 @@ const PokemonDetails = () => {
                 {pokemon != null &&
                     <>
                         <div className='text-center '>
-                            < h1 className='text-2xl mb-5'> {pokemonName}</h1 >
+                            < h1 className='text-2xl mb-5'> {`${pokemon.name.slice(0, 1).toUpperCase()}${pokemon.name.slice(1, pokemon.name.length)}`}</h1 >
                         </div >
                         <div className="flex border">
                             <div className="flex-col">
