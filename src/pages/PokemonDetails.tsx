@@ -45,8 +45,8 @@ const PokemonDetails = () => {
 
     let pokemonName;
 
-    if (pokemon) {
-        pokemonName = `${pokemon.name.slice(0, 1).toUpperCase()}${pokemon.name.slice(1, pokemon.name.length)}`
+    if (pokemon!.name) {
+        pokemonName = `${pokemon!.name.slice(0, 1).toUpperCase()}${pokemon!.name.slice(1, pokemon!.name.length)}`
     };
 
     return (
