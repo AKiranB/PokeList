@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/PokeList/static/css/main.a3fa8a7a.css",
+    "main.js": "/PokeList/static/js/main.dd76ecc1.js",
+    "static/js/787.acf7a9bd.chunk.js": "/PokeList/static/js/787.acf7a9bd.chunk.js",
+    "index.html": "/PokeList/index.html",
+    "main.a3fa8a7a.css.map": "/PokeList/static/css/main.a3fa8a7a.css.map",
+    "main.dd76ecc1.js.map": "/PokeList/static/js/main.dd76ecc1.js.map",
+    "787.acf7a9bd.chunk.js.map": "/PokeList/static/js/787.acf7a9bd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a3fa8a7a.css",
+    "static/js/main.dd76ecc1.js"
+  ]
+}
