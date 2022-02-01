@@ -14,7 +14,7 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/PokeList/" element={<PokemonList />} />
-            <Route path="PokeList/:name" element={<PokemonDetails />} />
+            <Route path="/PokeList/:name" element={<PokemonDetails />} />
           </Routes>
         </BrowserRouter>
       </div>
