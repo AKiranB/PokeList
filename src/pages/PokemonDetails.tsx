@@ -28,6 +28,8 @@ type pokemonDetails = {
 
 };
 
+console.log('hello')
+
 const PokemonDetails = () => {
     const [pokemon, setPokemon] = useState<pokemonDetails>();
 
@@ -45,12 +47,12 @@ const PokemonDetails = () => {
 
     return (
         <div className="flex justify-center">
-            <div className="p-10 rounded w-80 m-10 bg-gradient-to-r from-cyan-500 to-blue-500 border border-black">
+            {/* <div className="p-10 rounded w-80 m-10 bg-gradient-to-r from-cyan-500 to-blue-500 border border-black">
                 {loading && <p>loading</p>}
-                {pokemon != null &&
+                {pokemon &&
                     <>
                         <div className='text-center '>
-                            < h1 className='text-2xl mb-5'> {`${pokemon.name.slice(0, 1).toUpperCase()}${pokemon.name.slice(1, pokemon.name.length)}`}</h1 >
+                            < h1 className='text-2xl mb-5'> {pokemon.name}</h1 >
                         </div >
                         <div className="flex border">
                             <div className="flex-col">
@@ -70,7 +72,7 @@ const PokemonDetails = () => {
                         </div>
                     </>
                 }
-            </div >
+            </div > */}
         </div >
     )
 };
