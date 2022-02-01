@@ -47,7 +47,7 @@ const PokemonDetails = () => {
 
     return (
         <div className="flex justify-center">
-            {/* <div className="p-10 rounded w-80 m-10 bg-gradient-to-r from-cyan-500 to-blue-500 border border-black">
+            <div className="p-10 rounded w-80 m-10 bg-gradient-to-r from-cyan-500 to-blue-500 border border-black">
                 {loading && <p>loading</p>}
                 {pokemon &&
                     <>
@@ -72,7 +72,7 @@ const PokemonDetails = () => {
                         </div>
                     </>
                 }
-            </div > */}
+            </div >
         </div >
     )
 };
