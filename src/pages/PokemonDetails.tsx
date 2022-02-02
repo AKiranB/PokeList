@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import GET_POKEMON from '../operations/queries/getPokemonDetails';
 import capitalizeFirstLetter from '../utils/capitalizeFirstLetter'
 
-
 type abilities = {
     ability: {
         name: string,
