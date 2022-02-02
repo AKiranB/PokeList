@@ -11,6 +11,8 @@ import {
   gql
 } from "@apollo/client";
 
+import { ChakraProvider } from '@chakra-ui/react'
+
 
 const client = new ApolloClient({
   uri: 'https://graphql-pokeapi.graphcdn.app/',
@@ -21,7 +23,9 @@ const client = new ApolloClient({
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <ChakraProvider>
+        <App />
+      </ChakraProvider>
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')

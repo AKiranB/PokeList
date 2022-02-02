@@ -20,6 +20,7 @@ query pokemons($name:String!){
       abilities{
         ability{
           name
+          url
         }
       }
     }
