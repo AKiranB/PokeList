@@ -2,11 +2,14 @@ import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import GET_POKEMON from '../operations/queries/getPokemonDetails';
+import capitalizeFirstLetter from '../utils/capitalizeFirstLetter'
+
 
 type abilities = {
     ability: {
         name: string,
         url: string
+        description?: string
     }
 };
 
@@ -28,10 +31,9 @@ type pokemonDetails = {
 
 };
 
-console.log('hello from the details')
-
 const PokemonDetails = () => {
     const [pokemon, setPokemon] = useState<pokemonDetails>();
+    const [abilitiesDescription, setAbilitiesDescription] = useState()
 
     let params = useParams();
     let name = params.name;
@@ -45,23 +47,54 @@ const PokemonDetails = () => {
 
     }, [data]);
 
+    let pokemonName
+    let firstAbility = { name: '', description: '' }
+    let secondAbility = { name: '', description: '' }
+
+
+    const getDescription = async (url: string) => {
+        const data = await (await fetch(url)).json()
+        return data
+    };
+
+    if (pokemon) {
+        getDescription(pokemon.abilities[0].ability.url)
+            .then(res => {
+                setAbilitiesDescription(res.effect_entries[0].effect)
+            })
+            .catch(error => {
+                throw new Error(error)
+            })
+    };
+
+    if (pokemon) {
+        pokemonName = capitalizeFirstLetter(pokemon.name)
+        firstAbility.name = capitalizeFirstLetter(pokemon.abilities[0].ability.name)
+        secondAbility.name = capitalizeFirstLetter(pokemon.abilities[1].ability.name)
+    };
+
+
     return (
         <div className="flex justify-center">
-            <div className="p-10 rounded w-80 m-10 bg-gradient-to-r from-cyan-500 to-blue-500 border border-black">
+            <div className="p-10 rounded w-80 m-10 bg-gradient-to-r from-cyan-500 to-blue-500 border-4 border-yellow-500">
                 {loading && <p>loading</p>}
                 {pokemon &&
                     <>
                         <div className='text-center '>
-                            < h1 className='text-2xl mb-5'> {pokemon.name}</h1 >
-                        </div >
-                        <div className="flex border">
-                            <div className="flex-col">
-                                <p>Height: {pokemon.height} Feet</p>
-                                <p>Weight: {pokemon.weight} lbs</p>
+                            <h1 className='text-2xl mb-5'> {pokemonName}</h1 >
+                        </div>
+                        <div className="flex  flex-col">
+                            <div className="flex space-x-4">
+                                <span className="text-l px-2 py-0.5 rounded font-bold bg-green-600 text-white ">
+                                    <p>Height: {pokemon.height} Feet</p>
+                                    <p>Weight: {pokemon.weight} Lbs</p>
+                                </span>
+
                             </div>
                             <div>
-                                <p>Abilities:<br></br>
-                                    {pokemon.abilities[0].ability.name}, {pokemon.abilities[1] && pokemon.abilities[1].ability.name} </p>
+
+                                <p>Abilities: {firstAbility.name} {abilitiesDescription}, {secondAbility.name}</p>
+
                             </div>
                         </div>
                         <div className="flex justify-center w-64 flex-wrap">

@@ -21,7 +21,6 @@ const PokeCard = ({ url, name, image }: pokemonGeneralInfo) => {
 
     )
 
-
 };
 
 
