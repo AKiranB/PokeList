@@ -4,7 +4,6 @@ import PokemonList from './pages/PokemonList';
 import {
   BrowserRouter,
   Route,
-  Router,
   Routes,
 } from "react-router-dom";
 
@@ -14,7 +13,7 @@ const App = () => {
       {/* <div className="w-full h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ..."> */}
       <BrowserRouter>
         <Routes>
-          <Route path="/PokeList/" element={<PokemonList />} />
+          <Route path="/" element={<PokemonList />} />
           <Route path="/PokeList/:name" element={<PokemonDetails />} />
         </Routes>
       </BrowserRouter>
