@@ -23,9 +23,9 @@ const client = new ApolloClient({
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <ChakraProvider>
-        <App />
-      </ChakraProvider>
+
+      <App />
+
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
