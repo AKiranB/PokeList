@@ -3,32 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import GET_POKEMON from '../operations/queries/getPokemonDetails';
 import capitalizeFirstLetter from '../utils/capitalizeFirstLetter'
-
-type abilities = {
-    ability: {
-        name: string,
-        url: string
-        description?: string
-    }
-};
-
-type pokemonDetails = {
-    __typename: string,
-    name: string,
-    height: number,
-    weight: number,
-    sprites: {
-        __typename: string,
-        back_shiny: string,
-        front_default: string,
-        back_default: string,
-        front_shiny: string,
-    },
-    stats: object[],
-    abilities: abilities[],
-    abilityOneDescription?: string,
-    abilityTwoDescription?: string
-};
+import { pokemonDetails } from '../types/pokemonDetails'
 
 const PokemonDetails = () => {
     const [pokemon, setPokemon] = useState<pokemonDetails>();
@@ -37,14 +12,14 @@ const PokemonDetails = () => {
     let name = params.name;
     const { loading, data } = useQuery(GET_POKEMON, { variables: { name } });
 
+    let abilityDescriptions = { abilityOneDescription: '', abilityTwoDescription: '' }
+
     useEffect(() => {
         if (data) {
             setPokemon((() => data.pokemon))
             console.log('data')
         };
         if (pokemon) {
-
-            let abilityDescriptions = { abilityOneDescription: '', abilityTwoDescription: '' }
             getDescription(pokemon.abilities[0].ability.url)
                 .then(res => {
                     abilityDescriptions.abilityOneDescription = res.effect_entries[0].effect
