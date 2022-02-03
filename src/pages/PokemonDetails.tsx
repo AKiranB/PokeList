@@ -15,40 +15,46 @@ type abilities = {
 type pokemonDetails = {
     __typename: string,
     name: string,
-    height: number
-    weight: number
+    height: number,
+    weight: number,
     sprites: {
         __typename: string,
         back_shiny: string,
         front_default: string,
         back_default: string,
-        front_shiny: string
-
-    }
-    stats: object[]
-    abilities: abilities[]
-
+        front_shiny: string,
+    },
+    stats: object[],
+    abilities: abilities[],
+    abilityOneDescription?: string,
+    abilityTwoDescription?: string
 };
 
 const PokemonDetails = () => {
     const [pokemon, setPokemon] = useState<pokemonDetails>();
-    const [abilitiesDescription, setAbilitiesDescription] = useState()
-
+    let pokemonName
     let params = useParams();
     let name = params.name;
-
     const { loading, data } = useQuery(GET_POKEMON, { variables: { name } });
 
     useEffect(() => {
         if (data) {
             setPokemon((() => data.pokemon))
+            console.log('data')
         };
+        if (pokemon) {
 
-    }, [data]);
-
-    let pokemonName
-    let firstAbility = { name: '', description: '' }
-    let secondAbility = { name: '', description: '' }
+            let abilityDescriptions = { abilityOneDescription: '', abilityTwoDescription: '' }
+            getDescription(pokemon.abilities[0].ability.url)
+                .then(res => {
+                    abilityDescriptions.abilityOneDescription = res.effect_entries[0].effect
+                    setPokemon({ ...pokemon, ...abilityDescriptions })
+                })
+                .catch(error => {
+                    throw new Error(error)
+                });
+        };
+    }, [data, pokemon?.abilities]);
 
 
     const getDescription = async (url: string) => {
@@ -57,21 +63,9 @@ const PokemonDetails = () => {
     };
 
     if (pokemon) {
-        getDescription(pokemon.abilities[0].ability.url)
-            .then(res => {
-                setAbilitiesDescription(res.effect_entries[0].effect)
-            })
-            .catch(error => {
-                throw new Error(error)
-            })
+        console.log('pokemon if')
+        pokemonName = capitalizeFirstLetter(pokemon.name);
     };
-
-    if (pokemon) {
-        pokemonName = capitalizeFirstLetter(pokemon.name)
-        firstAbility.name = capitalizeFirstLetter(pokemon.abilities[0].ability.name)
-        secondAbility.name = capitalizeFirstLetter(pokemon.abilities[1].ability.name)
-    };
-
 
     return (
         <div className="flex justify-center">
@@ -88,12 +82,9 @@ const PokemonDetails = () => {
                                     <p>Height: {pokemon.height} Feet</p>
                                     <p>Weight: {pokemon.weight} Lbs</p>
                                 </span>
-
                             </div>
                             <div>
-
-                                <p>Abilities: {firstAbility.name} {abilitiesDescription}, {secondAbility.name}</p>
-
+                                <p>Abilities: {pokemon.abilityOneDescription} { }</p>
                             </div>
                         </div>
                         <div className="flex justify-center w-64 flex-wrap">
