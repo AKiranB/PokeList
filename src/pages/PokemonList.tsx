@@ -21,7 +21,6 @@ function PokemonList({ props }: any) {
         )
         )}
       </TiledContainer>
-
     </>
   )
 

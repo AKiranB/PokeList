@@ -16,7 +16,7 @@ const PokemonDetails = () => {
 
     useEffect(() => {
         if (data) {
-            setPokemon((() => data.pokemon))
+            setPokemon(data.pokemon)
             console.log('data')
         };
         if (pokemon) {
@@ -33,8 +33,8 @@ const PokemonDetails = () => {
 
 
     const getDescription = async (url: string) => {
-        const data = await (await fetch(url)).json()
-        return data
+        const data = await fetch(url)
+        return data.json()
     };
 
     if (pokemon) {
