@@ -17,7 +17,9 @@ export type pokemonDetails = {
 };
 
 export type abilities = {
+    __typename: string,
     ability: {
+
         name: string,
         url: string
         description?: string
