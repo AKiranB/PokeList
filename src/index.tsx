@@ -7,13 +7,10 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  useQuery,
-  gql
 } from "@apollo/client";
 import { Provider } from 'react-redux'
-import { createStore, configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import { pokemonReducer } from './app/reducer';
-import { addPokemon, removePokemon } from './app/actions';
 
 const client = new ApolloClient({
   uri: 'https://graphql-pokeapi.graphcdn.app/',
