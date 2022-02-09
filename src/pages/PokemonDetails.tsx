@@ -29,6 +29,7 @@ const PokemonDetails = () => {
                     throw new Error(error)
                 });
         };
+        console.log(pokemon)
     }, [data, pokemon?.abilities]);
 
 
