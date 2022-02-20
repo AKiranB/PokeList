@@ -2,21 +2,34 @@
 import { useEffect, useState, useCallback } from "react";
 import { pokemonGeneralInfo } from "../types/pokemonGeneral";
 import { useDispatch } from "react-redux";
-import { Button } from "@chakra-ui/react";
+import FavouriteButton from "./FavouriteButton";
+import { useAppSelector } from "../app/hooks";
+
 
 const PokeCard = ({ url, name, image }: pokemonGeneralInfo) => {
 
     const [pokemonName, setPokemonName] = useState<string>();
-    const [favorited, setFavorited] = useState<boolean>(false);
+    const [isFavorited, setIsFavorited] = useState<boolean>();
+    const favoritedPokemon = useAppSelector((state: any) => state.pokemon.pokemon)
+    // replace favorite button below by adding logic to favorite button component
+
+    useEffect(() => {
+        if (favoritedPokemon.includes(pokemonName)) {
+            setIsFavorited(true)
+        } else {
+            setIsFavorited(false)
+        }
+    }, [favoritedPokemon, isFavorited, pokemonName]);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
         if (name) {
-            console.log('pokeCard name capitalize')
             setPokemonName(`${name.slice(0, 1).toUpperCase()}${name.slice(1, name.length)}`)
         }
     }, [name]);
 
+    console.log('pokecard')
 
     return (
         <>
@@ -28,7 +41,8 @@ const PokeCard = ({ url, name, image }: pokemonGeneralInfo) => {
                     <img className="w-40" src={image} alt='a pokemon'>
                     </img>
                 </a>
-                <Button onClick={(() => dispatch({ type: 'ADD_POKEMON' }))}>Favourite Pokemon</Button>
+                <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onClick={(() => dispatch({ type: 'ADD_POKEMON', payload: pokemonName }))}>Favourite Pokemon</button>
+                <FavouriteButton isFavorited={isFavorited} />
             </div>
         </>
 
