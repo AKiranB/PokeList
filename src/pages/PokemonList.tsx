@@ -3,27 +3,35 @@ import PokeCard from '../components/PokeCard';
 import { pokemonGeneralInfo } from '../types/pokemonGeneral';
 import GET_ALL_POKEMON from '../operations/queries/getAllPokemon';
 import TiledContainer from '../components/layout/TiledContainer';
-import { useAppSelector } from "../app/hooks";
-import { store } from '..';
-import { addPokemon } from '../app/actions';
+import { useSelector } from 'react-redux';
+import { useAppSelector } from '../app/hooks';
+
 
 
 function PokemonList({ props }: any) {
-  const limit = 50
-  const { loading, data } = useQuery(GET_ALL_POKEMON, { variables: { limit } });
-  const pokemon = useAppSelector((state: any) => state.pokemon)
+  let limit = 5
+  const { loading, data, refetch } = useQuery(GET_ALL_POKEMON, { variables: { limit } });
 
+  console.log('pokelist')
   return (
     <>
-      <button ></button>
+      <button onClick={(() => {
+        //this needs to be checked out below
+        console.log(limit)
+        limit += 100
+        refetch({ limit })
+      })} >Load more</button>
       {loading && <p>loading</p>}
       <TiledContainer>
-        {data != null && data.pokemons.results.map((pokemon: pokemonGeneralInfo, i: number) => (
-          <PokeCard
+        {data != null && data.pokemons.results.map((pokemon: pokemonGeneralInfo, i: number) => {
+
+          return <PokeCard
             key={i}
             {...pokemon}
           />
-        )
+
+
+        }
         )}
       </TiledContainer>
     </>

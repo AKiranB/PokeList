@@ -12,26 +12,19 @@ const PokemonDetails = () => {
     let name = params.name;
     const { loading, data } = useQuery(GET_POKEMON, { variables: { name } });
 
-    let abilityDescriptions = { abilityOneDescription: '', abilityTwoDescription: '' }
-
     useEffect(() => {
         if (data) {
-            setPokemon(data.pokemon)
-            console.log('data')
-        };
-        if (pokemon) {
-            getDescription(pokemon.abilities[0].ability.url)
+            let abilityDescriptions = { abilityOneDescription: '', abilityTwoDescription: '' }
+            getDescription(data.pokemon.abilities[0].ability.url)
                 .then(res => {
                     abilityDescriptions.abilityOneDescription = res.effect_entries[0].effect
-                    setPokemon({ ...pokemon, ...abilityDescriptions })
+                    setPokemon({ ...data.pokemon, ...abilityDescriptions })
                 })
                 .catch(error => {
-                    throw new Error(error)
+                    console.log(error)
                 });
         };
-        console.log(pokemon)
-    }, [data, pokemon?.abilities]);
-
+    }, [data]);
 
     const getDescription = async (url: string) => {
         const data = await fetch(url)
