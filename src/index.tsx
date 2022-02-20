@@ -9,23 +9,22 @@ import {
   ApolloProvider,
 } from "@apollo/client";
 import { Provider } from 'react-redux'
-import { configureStore } from '@reduxjs/toolkit';
-import { pokemonReducer } from './app/reducer';
+import { store } from './app/store';
+import { saveState } from './app/browser-storage-';
+import { debounce } from 'debounce'
 
 const client = new ApolloClient({
   uri: 'https://graphql-pokeapi.graphcdn.app/',
   cache: new InMemoryCache()
 });
 
-export const store = configureStore({
-  reducer: {
-    pokemon: pokemonReducer,
-  },
-})
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
+store.subscribe(
+  // we use debounce to save the state once each 800ms
+  // for better performances in case multiple changes occur in a short time
+  debounce(() => {
+    saveState(store.getState());
+  }, 800)
+);
 
 ReactDOM.render(
   <React.StrictMode>
