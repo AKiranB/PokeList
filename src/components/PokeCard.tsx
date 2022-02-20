@@ -4,6 +4,7 @@ import { pokemonGeneralInfo } from "../types/pokemonGeneral";
 import { useDispatch } from "react-redux";
 import FavouriteButton from "./FavouriteButton";
 import { useAppSelector } from "../app/hooks";
+import capitalizeFirstLetter from "../utils/capitalizeFirstLetter";
 
 
 const PokeCard = ({ url, name, image }: pokemonGeneralInfo) => {
@@ -11,7 +12,6 @@ const PokeCard = ({ url, name, image }: pokemonGeneralInfo) => {
     const [pokemonName, setPokemonName] = useState<string>();
     const [isFavorited, setIsFavorited] = useState<boolean>();
     const favoritedPokemon = useAppSelector((state: any) => state.pokemon.pokemon)
-    // replace favorite button below by adding logic to favorite button component
 
     useEffect(() => {
         if (favoritedPokemon.includes(pokemonName)) {
@@ -21,15 +21,12 @@ const PokeCard = ({ url, name, image }: pokemonGeneralInfo) => {
         }
     }, [favoritedPokemon, isFavorited, pokemonName]);
 
-    const dispatch = useDispatch();
-
     useEffect(() => {
         if (name) {
-            setPokemonName(`${name.slice(0, 1).toUpperCase()}${name.slice(1, name.length)}`)
+            setPokemonName(capitalizeFirstLetter(name))
         }
     }, [name]);
 
-    console.log('pokecard')
 
     return (
         <>
@@ -41,8 +38,8 @@ const PokeCard = ({ url, name, image }: pokemonGeneralInfo) => {
                     <img className="w-40" src={image} alt='a pokemon'>
                     </img>
                 </a>
-                <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onClick={(() => dispatch({ type: 'ADD_POKEMON', payload: pokemonName }))}>Favourite Pokemon</button>
-                <FavouriteButton isFavorited={isFavorited} />
+
+                <FavouriteButton pokemonName={pokemonName} isFavorited={isFavorited} />
             </div>
         </>
 
