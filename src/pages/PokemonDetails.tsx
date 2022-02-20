@@ -4,13 +4,16 @@ import { useParams } from "react-router-dom";
 import GET_POKEMON from '../operations/queries/getPokemonDetails';
 import capitalizeFirstLetter from '../utils/capitalizeFirstLetter'
 import { pokemonDetails } from '../types/pokemonDetails'
+import FavouriteButton from "../components/FavouriteButton";
+import { useAppSelector } from "../app/hooks";
 
 const PokemonDetails = () => {
     const [pokemon, setPokemon] = useState<pokemonDetails>();
-    let pokemonName
+    const [isFavorited, setIsFavorited] = useState<boolean>();
     let params = useParams();
     let name = params.name;
     const { loading, data } = useQuery(GET_POKEMON, { variables: { name } });
+    const favoritedPokemon = useAppSelector((state: any) => state.pokemon.pokemon)
 
     useEffect(() => {
         if (data) {
@@ -26,6 +29,14 @@ const PokemonDetails = () => {
         };
     }, [data]);
 
+    useEffect(() => {
+        if (favoritedPokemon.includes(name)) {
+            setIsFavorited(true)
+        } else {
+            setIsFavorited(false)
+        }
+    }, [favoritedPokemon, name]);
+
     const getDescription = async (url: string) => {
         const data = await fetch(url)
         return data.json()
@@ -33,7 +44,7 @@ const PokemonDetails = () => {
 
     if (pokemon) {
         console.log('pokemon if')
-        pokemonName = capitalizeFirstLetter(pokemon.name);
+        name = capitalizeFirstLetter(pokemon.name);
     };
 
     return (
@@ -43,7 +54,7 @@ const PokemonDetails = () => {
                 {pokemon &&
                     <>
                         <div className='text-center '>
-                            <h1 className='text-2xl mb-5'> {pokemonName}</h1 >
+                            <h1 className='text-2xl mb-5'> {name}</h1 >
                         </div>
                         <div className="flex  flex-col">
                             <div className="flex space-x-4">
@@ -62,6 +73,7 @@ const PokemonDetails = () => {
                             <img className="w-32" alt="back sprite" src={pokemon.sprites.back_shiny}></img>
                             <img className="w-32" alt="back sprite" src={pokemon.sprites.back_default}></img>
                         </div>
+                        <FavouriteButton pokemonName={name} isFavorited={isFavorited} />
                     </>
                 }
             </div >

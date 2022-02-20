@@ -16,7 +16,7 @@ export const pokemonReducer = (state = initialState, action: AnyAction) => {
         case "REMOVE_POKEMON":
             return {
                 pokemon: [
-                    ...state.pokemon.filter((pokemon: pokemonDetails) => pokemon.name !== action.payload)
+                    ...state.pokemon.filter((pokemon: pokemonDetails) => pokemon.name === action.payload)
                 ]
             }
         default:

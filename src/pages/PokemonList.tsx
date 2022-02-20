@@ -24,13 +24,10 @@ function PokemonList({ props }: any) {
       {loading && <p>loading</p>}
       <TiledContainer>
         {data != null && data.pokemons.results.map((pokemon: pokemonGeneralInfo, i: number) => {
-
           return <PokeCard
             key={i}
             {...pokemon}
           />
-
-
         }
         )}
       </TiledContainer>
