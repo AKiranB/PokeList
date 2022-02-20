@@ -1,7 +1,8 @@
 import { pokemonDetails } from './pokemonDetails'
+import { pokemonGeneralInfo } from './pokemonGeneral'
 
 type favoritesState = {
-    pokemon: pokemonDetails[]
+    pokemon: pokemonGeneralInfo[]
 }
 
 export default favoritesState

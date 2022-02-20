@@ -1,6 +1,5 @@
 import favoritesState from "../types/favoritesState";
 import { AnyAction } from "@reduxjs/toolkit";
-import { pokemonDetails } from "../types/pokemonDetails";
 
 const initialState: favoritesState = {
     pokemon: []
@@ -16,7 +15,7 @@ export const pokemonReducer = (state = initialState, action: AnyAction) => {
         case "REMOVE_POKEMON":
             return {
                 pokemon: [
-                    ...state.pokemon.filter((pokemon: pokemonDetails) => pokemon.name === action.payload)
+                    ...state.pokemon.filter((pokemon) => pokemon.name !== action.payload)
                 ]
             }
         default:
@@ -24,4 +23,4 @@ export const pokemonReducer = (state = initialState, action: AnyAction) => {
                 ...state
             }
     }
-};
+}

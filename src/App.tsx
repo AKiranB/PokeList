@@ -10,14 +10,12 @@ import {
 const App = () => {
   return (
     <>
-
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<PokemonList />} />
           <Route path="/PokeList/:name" element={<PokemonDetails />} />
         </Routes>
       </BrowserRouter>
-
     </>
   )
 };
