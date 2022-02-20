@@ -2,7 +2,6 @@ import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import GET_POKEMON from '../operations/queries/getPokemonDetails';
-import capitalizeFirstLetter from '../utils/capitalizeFirstLetter'
 import { pokemonDetails } from '../types/pokemonDetails'
 import FavouriteButton from "../components/FavouriteButton";
 import { useAppSelector } from "../app/hooks";
@@ -14,6 +13,7 @@ const PokemonDetails = () => {
     let name = params.name;
     const { loading, data } = useQuery(GET_POKEMON, { variables: { name } });
     const favoritedPokemon = useAppSelector((state: any) => state.pokemon.pokemon)
+    console.log(name)
 
     useEffect(() => {
         if (data) {
@@ -30,7 +30,9 @@ const PokemonDetails = () => {
     }, [data]);
 
     useEffect(() => {
+
         if (favoritedPokemon.includes(name)) {
+            console.log(name)
             setIsFavorited(true)
         } else {
             setIsFavorited(false)
@@ -38,13 +40,8 @@ const PokemonDetails = () => {
     }, [favoritedPokemon, name]);
 
     const getDescription = async (url: string) => {
-        const data = await fetch(url)
-        return data.json()
-    };
-
-    if (pokemon) {
-        console.log('pokemon if')
-        name = capitalizeFirstLetter(pokemon.name);
+        const data = await fetch(url);
+        return data.json();
     };
 
     return (
@@ -72,8 +69,9 @@ const PokemonDetails = () => {
                             <img className="w-32" alt="front sprite" src={pokemon.sprites.front_default}></img>
                             <img className="w-32" alt="back sprite" src={pokemon.sprites.back_shiny}></img>
                             <img className="w-32" alt="back sprite" src={pokemon.sprites.back_default}></img>
-                        </div>
-                        <FavouriteButton pokemonName={name} isFavorited={isFavorited} />
+                        </div>]
+                        {/* todo, figure out how to pass the correct shaped object from th data belw into the button */}
+                        {/* <FavouriteButton pokemon={ } isFavorited={isFavorited} /> */}
                     </>
                 }
             </div >

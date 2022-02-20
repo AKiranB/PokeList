@@ -1,25 +1,28 @@
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { pokemonGeneralInfo } from "../types/pokemonGeneral";
-import { useDispatch } from "react-redux";
-import FavouriteButton from "./FavouriteButton";
 import { useAppSelector } from "../app/hooks";
 import capitalizeFirstLetter from "../utils/capitalizeFirstLetter";
+import FavouriteButton from "./FavouriteButton";
+import { Link } from "react-router-dom";
 
-
-const PokeCard = ({ url, name, image }: pokemonGeneralInfo) => {
+const PokeCard = ({ ...pokemon }: pokemonGeneralInfo) => {
 
     const [pokemonName, setPokemonName] = useState<string>();
     const [isFavorited, setIsFavorited] = useState<boolean>();
     const favoritedPokemon = useAppSelector((state: any) => state.pokemon.pokemon)
 
+    console.log(favoritedPokemon);
+
+    const { name, image } = pokemon
+
     useEffect(() => {
-        if (favoritedPokemon.includes(pokemonName)) {
+        if (favoritedPokemon.some((pokemon: pokemonGeneralInfo) => pokemon['name'] === name)) {
             setIsFavorited(true)
         } else {
             setIsFavorited(false)
         }
-    }, [favoritedPokemon, isFavorited, pokemonName]);
+    }, [favoritedPokemon, isFavorited, name]);
 
     useEffect(() => {
         if (name) {
@@ -27,19 +30,18 @@ const PokeCard = ({ url, name, image }: pokemonGeneralInfo) => {
         }
     }, [name]);
 
-
     return (
         <>
             <div className="p-10 rounded m-10 bg-gradient-to-r from-cyan-500 to-blue-500">
-                <a href={`/PokeList/${name}`}>
+                <Link to={`/PokeList/${name}`}>
                     <p className="text-center">
                         {pokemonName}
                     </p>
                     <img className="w-40" src={image} alt='a pokemon'>
                     </img>
-                </a>
+                </Link>
 
-                <FavouriteButton pokemonName={pokemonName} isFavorited={isFavorited} />
+                <FavouriteButton isFavorited={isFavorited} pokemon={pokemon} />
             </div>
         </>
 
@@ -47,5 +49,4 @@ const PokeCard = ({ url, name, image }: pokemonGeneralInfo) => {
 
 };
 
-
-export default PokeCard
+export default PokeCard;
