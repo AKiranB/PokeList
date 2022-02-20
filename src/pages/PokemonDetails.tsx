@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import GET_POKEMON from '../operations/queries/getPokemonDetails';
 import { pokemonDetails } from '../types/pokemonDetails'
-import FavouriteButton from "../components/FavouriteButton";
+// import FavouriteButton from "../components/FavouriteButton";
 import { useAppSelector } from "../app/hooks";
 
 const PokemonDetails = () => {
@@ -30,7 +30,6 @@ const PokemonDetails = () => {
     }, [data]);
 
     useEffect(() => {
-
         if (favoritedPokemon.includes(name)) {
             console.log(name)
             setIsFavorited(true)
@@ -71,7 +70,7 @@ const PokemonDetails = () => {
                             <img className="w-32" alt="back sprite" src={pokemon.sprites.back_default}></img>
                         </div>]
                         {/* todo, figure out how to pass the correct shaped object from th data belw into the button */}
-                        {/* <FavouriteButton pokemon={ } isFavorited={isFavorited} /> */}
+                        {/* <FavouriteButton pokemon={pokemon} isFavorited={isFavorited} /> */}
                     </>
                 }
             </div >

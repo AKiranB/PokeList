@@ -12,8 +12,6 @@ const PokeCard = ({ ...pokemon }: pokemonGeneralInfo) => {
     const [isFavorited, setIsFavorited] = useState<boolean>();
     const favoritedPokemon = useAppSelector((state: any) => state.pokemon.pokemon)
 
-    console.log(favoritedPokemon);
-
     const { name, image } = pokemon
 
     useEffect(() => {
