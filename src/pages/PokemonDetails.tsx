@@ -8,7 +8,7 @@ import { useAppSelector } from "../app/hooks";
 
 const PokemonDetails = () => {
     const [pokemon, setPokemon] = useState<pokemonDetails>();
-    const [isFavorited, setIsFavorited] = useState<boolean>();
+    const [, setIsFavorited] = useState<boolean>();
     let params = useParams();
     let name = params.name;
     const { loading, data } = useQuery(GET_POKEMON, { variables: { name } });

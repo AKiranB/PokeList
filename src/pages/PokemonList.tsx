@@ -3,7 +3,7 @@ import PokeCard from '../components/PokeCard';
 import { pokemonGeneralInfo } from '../types/pokemonGeneral';
 import GET_ALL_POKEMON from '../operations/queries/getAllPokemon';
 import TiledContainer from '../components/layout/TiledContainer';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function PokemonList() {
   const [limit, setLimit] = useState(10);
