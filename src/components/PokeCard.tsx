@@ -5,6 +5,7 @@ import { useAppSelector } from "../app/hooks";
 import capitalizeFirstLetter from "../utils/capitalizeFirstLetter";
 import FavouriteButton from "./FavouriteButton";
 import { Link } from "react-router-dom";
+import Main from "./layout/Main";
 
 const PokeCard = ({ ...pokemon }: pokemonGeneralInfo) => {
 
@@ -30,7 +31,7 @@ const PokeCard = ({ ...pokemon }: pokemonGeneralInfo) => {
 
     return (
         <>
-            <div className="p-10 rounded m-10 bg-gradient-to-r from-cyan-500 to-blue-500">
+            <div className="p-10 w-65 flex items-center justify-center flex-col rounded m-10 bg-gradient-to-r from-cyan-500 to-blue-500">
                 <Link to={`/PokeList/${name}`}>
                     <p className="text-center">
                         {pokemonName}
