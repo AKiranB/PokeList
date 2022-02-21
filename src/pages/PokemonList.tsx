@@ -7,17 +7,10 @@ import { useEffect, useState } from 'react';
 
 function PokemonList() {
   const [limit, setLimit] = useState(10);
-  const [pokemonList, setPokemonList] = useState();
   const { loading, data, refetch } = useQuery(GET_ALL_POKEMON, { variables: { limit } });
 
   return (
     <>
-      <button onClick={(() => {
-        //this needs to be checked out below
-        setLimit(limit + 10)
-        console.log(limit)
-
-      })} >Load more</button>
       {loading && <p>loading</p>}
       <TiledContainer>
         {data != null && data.pokemons.results.map((pokemon: pokemonGeneralInfo, i: number) => {
@@ -28,6 +21,12 @@ function PokemonList() {
         }
         )}
       </TiledContainer>
+      <div>
+        <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onClick={(() => {
+          setLimit(limit + 10)
+          refetch({ limit })
+        })} >Load more</button>
+      </div>
     </>
   )
 
