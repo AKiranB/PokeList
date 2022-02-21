@@ -5,7 +5,7 @@ import { useAppSelector } from "../app/hooks";
 import capitalizeFirstLetter from "../utils/capitalizeFirstLetter";
 import FavouriteButton from "./FavouriteButton";
 import { Link } from "react-router-dom";
-import Main from "./layout/Main";
+
 
 const PokeCard = ({ ...pokemon }: pokemonGeneralInfo) => {
 
