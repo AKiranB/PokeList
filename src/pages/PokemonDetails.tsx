@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import GET_POKEMON from '../operations/queries/getPokemonDetails';
 import { pokemonDetails } from '../types/pokemonDetails'
-// import FavouriteButton from "../components/FavouriteButton";
+import FavouriteButton from "../components/FavouriteButton";
 import { useAppSelector } from "../app/hooks";
+import Heading from '../components/Heading';
+import getDescription from "../utils/getDescription";
 
 const PokemonDetails = () => {
     const [pokemon, setPokemon] = useState<pokemonDetails>();
@@ -13,7 +15,6 @@ const PokemonDetails = () => {
     let name = params.name;
     const { loading, data } = useQuery(GET_POKEMON, { variables: { name } });
     const favoritedPokemon = useAppSelector((state: any) => state.pokemon.pokemon)
-    console.log(name)
 
     useEffect(() => {
         if (data) {
@@ -38,10 +39,7 @@ const PokemonDetails = () => {
         }
     }, [favoritedPokemon, name]);
 
-    const getDescription = async (url: string) => {
-        const data = await fetch(url);
-        return data.json();
-    };
+
 
     return (
         <div className="flex justify-center">
@@ -50,7 +48,7 @@ const PokemonDetails = () => {
                 {pokemon &&
                     <>
                         <div className='text-center '>
-                            <h1 className='text-2xl mb-5'> {name}</h1 >
+                            <Heading name={pokemon.name} />
                         </div>
                         <div className="flex  flex-col">
                             <div className="flex space-x-4">

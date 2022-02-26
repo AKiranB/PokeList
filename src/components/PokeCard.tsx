@@ -1,15 +1,13 @@
-
 import { useEffect, useState } from "react";
 import { pokemonGeneralInfo } from "../types/pokemonGeneral";
 import { useAppSelector } from "../app/hooks";
-import capitalizeFirstLetter from "../utils/capitalizeFirstLetter";
 import FavouriteButton from "./FavouriteButton";
 import { Link } from "react-router-dom";
+import Heading from "./Heading";
 
 
 const PokeCard = ({ ...pokemon }: pokemonGeneralInfo) => {
 
-    const [pokemonName, setPokemonName] = useState<string>();
     const [isFavorited, setIsFavorited] = useState<boolean>();
     const favoritedPokemon = useAppSelector((state: any) => state.pokemon.pokemon)
 
@@ -23,29 +21,20 @@ const PokeCard = ({ ...pokemon }: pokemonGeneralInfo) => {
         }
     }, [favoritedPokemon, isFavorited, name]);
 
-    useEffect(() => {
-        if (name) {
-            setPokemonName(capitalizeFirstLetter(name))
-        }
-    }, [name]);
-
     return (
         <>
-            <div className="p-10 w-65 flex items-center justify-center flex-col rounded m-10 bg-gradient-to-r from-cyan-500 to-blue-500">
+            <div className="p-10 w-65 flex items-center justify-center flex-col rounded m-16 bg-gradient-to-r from-cyan-500 to-blue-500">
                 <Link to={`/PokeList/${name}`}>
-                    <p className="text-center">
-                        {pokemonName}
-                    </p>
+                    <div className="text-center">
+                        <Heading name={name} />
+                    </div>
                     <img className="w-40" src={image} alt='a pokemon'>
                     </img>
                 </Link>
-
                 <FavouriteButton isFavorited={isFavorited} pokemon={pokemon} />
             </div>
         </>
-
     )
-
 };
 
 export default PokeCard;
