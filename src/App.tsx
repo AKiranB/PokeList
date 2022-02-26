@@ -7,18 +7,27 @@ import {
   Routes,
 } from "react-router-dom";
 import Main from './components/layout/Main';
-
+import Nav from './components/Nav';
+import FavouritesList from './pages/FavouritesList';
+import { useState } from 'react';
 const App = () => {
-  return (
 
-    <Main>
+  const [searchString, setSearchString] = useState<string>('')
+
+  return (
+    <>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<PokemonList />} />
-          <Route path="/PokeList/:name" element={<PokemonDetails />} />
-        </Routes>
+        <Nav searchString={searchString} setSearchString={setSearchString} />
+        <Main>
+          <Routes>
+            <Route path="/" element={<PokemonList searchString={searchString} />} />
+            <Route path="/PokeList/:name" element={<PokemonDetails />} />
+            <Route path='/favourites' element={<FavouritesList />}></Route>
+          </Routes>
+        </Main>
       </BrowserRouter>
-    </Main>
+
+    </>
 
   )
 };
