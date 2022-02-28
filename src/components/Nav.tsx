@@ -9,7 +9,7 @@ type props = {
 
 const Nav = ({ searchString, setSearchString }: props) => {
 
-    const [navbarOpen, setNavbarOpen] = useState<boolean>();
+    const [navbarOpen,] = useState<boolean>();
 
     return (
         <nav className="relative flex flex-wrap items-center justify-between px-10 py-3 bg-blue-500 ">
@@ -21,9 +21,10 @@ const Nav = ({ searchString, setSearchString }: props) => {
                     >
                         Home
                     </Link>
-                    <SearchBar searchString={searchString} setSearchString={setSearchString} />
+
 
                 </div>
+                <SearchBar searchString={searchString} setSearchString={setSearchString} />
                 <div
                     className={
                         "lg:flex flex-grow items-center" +

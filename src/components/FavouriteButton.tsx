@@ -18,7 +18,6 @@ const FavouriteButton = ({ ...props }: props) => {
         <>
             <div className='flex w-64 items-center justify-center '>
                 <button className="text-center hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onClick={(() => dispatch({ type: 'ADD_POKEMON', payload: props.pokemon }))} > Favourite </button>
-
             </div>
 
         </>))
