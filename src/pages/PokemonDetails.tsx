@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import GET_POKEMON from '../operations/queries/getPokemonDetails';
 import { pokemonDetails } from '../types/pokemonDetails'
-import FavouriteButton from "../components/FavouriteButton";
 import { useAppSelector } from "../app/hooks";
 import Heading from '../components/Heading';
 import getDescription from "../utils/getDescription";

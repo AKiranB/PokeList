@@ -12,8 +12,7 @@ export type pokemonDetails = {
     },
     stats: object[],
     abilities: abilities[],
-    abilityOneDescription?: string,
-    abilityTwoDescription?: string
+    abilityDescriptions: { [key: string]: object }
 };
 
 export type abilities = {
