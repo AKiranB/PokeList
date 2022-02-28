@@ -10,7 +10,8 @@ const Heading = ({ name }: props) => {
 
     return (
         <>
-            {pokemonName && <h3 className="font-medium leading-tight text-3xl mt-0 mb-2 ">{pokemonName}</h3>}
+            {pokemonName && <h3 className="font-medium 
+            text-black leading-tight text-3xl mt-0 mb-10 ">{pokemonName}</h3>}
         </>
     )
 };

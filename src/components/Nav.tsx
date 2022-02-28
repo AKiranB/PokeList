@@ -21,9 +21,10 @@ const Nav = ({ searchString, setSearchString }: props) => {
                     >
                         Home
                     </Link>
-                    <SearchBar searchString={searchString} setSearchString={setSearchString} />
+
 
                 </div>
+                <SearchBar searchString={searchString} setSearchString={setSearchString} />
                 <div
                     className={
                         "lg:flex flex-grow items-center" +
