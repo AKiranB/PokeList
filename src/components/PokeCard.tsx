@@ -13,6 +13,8 @@ const PokeCard = ({ ...pokemon }: pokemonGeneralInfo) => {
 
     const { name, image } = pokemon
 
+    console.log(image)
+
     useEffect(() => {
         if (favoritedPokemon.some((pokemon: pokemonGeneralInfo) => pokemon['name'] === name)) {
             setIsFavorited(true)
@@ -29,7 +31,7 @@ const PokeCard = ({ ...pokemon }: pokemonGeneralInfo) => {
                     <div className="text-center">
                         <Heading name={name} />
                     </div>
-                    <img className="mb-10 w-40" src={image} alt='a pokemon'>
+                    <img className="mb-10 w-40" src={image} loading='lazy' alt='a pokemon'>
                     </img>
                 </Link>
                 <FavouriteButton isFavorited={isFavorited} pokemon={pokemon} />
