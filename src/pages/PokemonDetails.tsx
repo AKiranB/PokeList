@@ -47,7 +47,7 @@ const PokemonDetails = () => {
         } else {
             setIsFavorited(false)
         }
-    }, [favoritedPokemon, name]);
+    }, [favoritedPokemon, name])
 
     return (
         <div className="p-10 rounded flex flex-col items-center m-16 w-auto m-10 bg-gradient-to-r from-cyan-500 to-blue-500 border-4 border-yellow-500">
